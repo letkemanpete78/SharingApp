@@ -1,0 +1,211 @@
+@startuml
+
+title __SHARINGAPP's Class Diagram__\n
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.AddItemActivity {
+        - REQUEST_CODE : int
+        - context : Context
+        - description : EditText
+        - height : EditText
+        - image : Bitmap
+        - length : EditText
+        - maker : EditText
+        - photo : ImageView
+        - title : EditText
+        - width : EditText
+        + addPhoto()
+        + deletePhoto()
+        + saveItem()
+        # onActivityResult()
+        # onCreate()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.AllItemsFragment {
+        + filterItems()
+        + onCreateView()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.AvailableItemsFragment {
+        + filterItems()
+        + onCreateView()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.BorrowedItemsFragment {
+        + filterItems()
+        + onCreateView()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.Dimensions {
+        - height : String
+        - length : String
+        - width : String
+        + Dimensions()
+        + getDimensions()
+        + getHeight()
+        + getLength()
+        + getWidth()
+        + setDimensions()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.EditItemActivity {
+        - REQUEST_CODE : int
+        - borrower : EditText
+        - borrower_tv : TextView
+        - context : Context
+        - description : EditText
+        - height : EditText
+        - image : Bitmap
+        - length : EditText
+        - maker : EditText
+        - photo : ImageView
+        - status : Switch
+        - title : EditText
+        - width : EditText
+        + addPhoto()
+        + deleteItem()
+        + deletePhoto()
+        + saveItem()
+        + toggleSwitch()
+        # onActivityResult()
+        # onCreate()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.Item {
+        # image : Bitmap
+        # image_base64 : String
+        - borrower : String
+        - description : String
+        - id : String
+        - maker : String
+        - status : String
+        - title : String
+        + Item()
+        + addImage()
+        + getBorrower()
+        + getDescription()
+        + getDimensions()
+        + getId()
+        + getImage()
+        + getMaker()
+        + getStatus()
+        + getTitle()
+        + setBorrower()
+        + setDescription()
+        + setDimensions()
+        + setId()
+        + setMaker()
+        + setStatus()
+        + setTitle()
+        + updateId()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.ItemAdapter {
+        - context : Context
+        - fragment : Fragment
+        - inflater : LayoutInflater
+        + ItemAdapter()
+        + getView()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.ItemList {
+        - FILENAME : String
+        {static} - items : ArrayList<Item>
+        + ItemList()
+        + addItem()
+        + deleteItem()
+        + filterItemsByStatus()
+        + getIndex()
+        + getItem()
+        + getItems()
+        + getSize()
+        + loadItems()
+        + saveItems()
+        + setItems()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    abstract class com.example.sharingapp.ItemsFragment {
+        ~ rootView : View
+        - adapter : ArrayAdapter<Item>
+        - container : ViewGroup
+        - context : Context
+        - inflater : LayoutInflater
+        - list_view : ListView
+        - selected_items : ArrayList<Item>
+        {abstract} + filterItems()
+        + onCreateView()
+        + setAdapter()
+        + setVariables()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.MainActivity {
+        + addItemActivity()
+        # onCreate()
+    }
+  }
+  
+
+  namespace com.example.sharingapp {
+    class com.example.sharingapp.SectionsPagerAdapter {
+        + SectionsPagerAdapter()
+        + getCount()
+        + getItem()
+        + getPageTitle()
+    }
+  }
+  
+
+  com.example.sharingapp.AddItemActivity -up-|> android.support.v7.app.AppCompatActivity
+  com.example.sharingapp.AddItemActivity o-- com.example.sharingapp.ItemList : item_list
+  com.example.sharingapp.AllItemsFragment -up-|> com.example.sharingapp.ItemsFragment
+  com.example.sharingapp.AvailableItemsFragment -up-|> com.example.sharingapp.ItemsFragment
+  com.example.sharingapp.BorrowedItemsFragment -up-|> com.example.sharingapp.ItemsFragment
+  com.example.sharingapp.EditItemActivity -up-|> android.support.v7.app.AppCompatActivity
+  com.example.sharingapp.EditItemActivity o-- com.example.sharingapp.Item : item
+  com.example.sharingapp.EditItemActivity o-- com.example.sharingapp.ItemList : item_list
+  com.example.sharingapp.Item o-- com.example.sharingapp.Dimensions : dimensions
+  com.example.sharingapp.ItemAdapter -up-|> android.widget.ArrayAdapter
+  com.example.sharingapp.ItemsFragment -up-|> android.support.v4.app.Fragment
+  com.example.sharingapp.ItemsFragment o-- com.example.sharingapp.ItemList : item_list
+  com.example.sharingapp.MainActivity -up-|> android.support.v7.app.AppCompatActivity
+  com.example.sharingapp.SectionsPagerAdapter -up-|> android.support.v4.app.FragmentPagerAdapter
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+class ItemList {
+    -items: static ArrayList<Item> 
+    -FILENAME: String  = "items.sav"
+
+    +ItemList() 
+    +setItems(item_list: ArrayList<Item> ) 
+    +getItems():ArrayList<Item>
+    +addItem(item: Item) 
+    +deleteItem(item: Item)
+    +Item: getItem(index:int)
+    +int: getIndex(item: Item)
+    +int: getSize()
+
+    +loadItems(context: Context) 
+    +saveItems(context: Context)
+    +public ArrayList<Item>: filterItemsByStatus(String: status)
+}
+@enduml
