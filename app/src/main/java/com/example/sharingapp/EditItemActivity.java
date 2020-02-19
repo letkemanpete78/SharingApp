@@ -70,9 +70,9 @@ public class EditItemActivity extends AppCompatActivity {
         width.setText(dimensions.getWidth());
         height.setText(dimensions.getHeight());
 
-        String status_str = item.getStatus();
-        if (status_str.equals("Borrowed")) {
-            status.setChecked(false);
+        com.example.sharingapp.Status status = item.getStatus();
+        if (status.equals("Borrowed")) {
+            this.status.setChecked(false);
             borrower.setText(item.getBorrower());
         } else {
             borrower_tv.setVisibility(View.GONE);
@@ -168,11 +168,11 @@ public class EditItemActivity extends AppCompatActivity {
         String id = item.getId();
         item_list.deleteItem(item);
 
-        Item updated_item = new Item(title_str, maker_str, description_str, dimensions, image, id);
+        Item updated_item = new Item(title_str,maker_str,description_str,dimensions,image,Status.BORROWED);
 
         boolean checked = status.isChecked();
         if (!checked) {
-            updated_item.setStatus("Borrowed");
+            updated_item.setStatus(Status.BORROWED);
             updated_item.setBorrower(borrower_str);
         }
         item_list.addItem(updated_item);
@@ -194,7 +194,7 @@ public class EditItemActivity extends AppCompatActivity {
             borrower.setVisibility(View.GONE);
             borrower_tv.setVisibility(View.GONE);
             item.setBorrower("");
-            item.setStatus("Available");
+            item.setStatus(Status.BORROWED);
 
         } else {
             // Means was previously available

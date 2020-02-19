@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ItemList class
@@ -22,15 +23,26 @@ public class ItemList {
     private static ArrayList<Item> items;
     private String FILENAME = "items.sav";
 
-    public ItemList() {
-        items = new ArrayList<Item>();
+    public List<Item> fullItemList (){
+        return listOfItems(null);
+    }
+    public List<Item> availbleItemList (){
+        return listOfItems(true);
+    }
+    public List<Item> borrowedItemList (){
+        return listOfItems(false);
+    }
+
+    private List<Item> listOfItems(Boolean isAvailble) {
+        items = new ArrayList<>();
+        return items;
     }
 
     public void setItems(ArrayList<Item> item_list) {
         items = item_list;
     }
 
-    public ArrayList<Item> getItems() {
+    public List<Item> getItems() {
         return items;
     }
 
@@ -92,7 +104,7 @@ public class ItemList {
         }
     }
 
-    public ArrayList<Item> filterItemsByStatus(String status){
+    public ArrayList<Item> filterItemsByStatus(Status status){
         ArrayList<Item> selected_items = new ArrayList<>();
         for (Item i: items) {
             if (i.getStatus().equals(status)) {

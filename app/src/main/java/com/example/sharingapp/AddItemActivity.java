@@ -88,7 +88,7 @@ public class AddItemActivity extends AppCompatActivity {
         }
 
         Dimensions dimensions = new Dimensions(length_str, width_str, height_str);
-        Item item = new Item(title_str, maker_str, description_str, dimensions, image, null );
+        Item item = new Item(title_str, maker_str, description_str, dimensions, image, Status.AVAILABLE );
 
         item_list.addItem(item);
         item_list.saveItems(context);
