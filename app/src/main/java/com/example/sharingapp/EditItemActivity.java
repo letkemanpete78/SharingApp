@@ -3,9 +3,9 @@ package com.example.sharingapp;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -41,16 +41,16 @@ public class EditItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        title = (EditText) findViewById(R.id.title);
-        maker = (EditText) findViewById(R.id.maker);
-        description = (EditText) findViewById(R.id.description);
-        length = (EditText) findViewById(R.id.length);
-        width = (EditText) findViewById(R.id.width);
-        height = (EditText) findViewById(R.id.height);
-        borrower = (EditText) findViewById(R.id.borrower);
-        borrower_tv = (TextView) findViewById(R.id.borrower_tv);
-        photo = (ImageView) findViewById(R.id.image_view);
-        status = (Switch) findViewById(R.id.available_switch);
+        title = findViewById(R.id.title);
+        maker = findViewById(R.id.maker);
+        description = findViewById(R.id.description);
+        length = findViewById(R.id.length);
+        width = findViewById(R.id.width);
+        height = findViewById(R.id.height);
+        borrower = findViewById(R.id.borrower);
+        borrower_tv = findViewById(R.id.borrower_tv);
+        photo = findViewById(R.id.image_view);
+        status = findViewById(R.id.available_switch);
 
         context = getApplicationContext();
         item_list.loadItems(context);
@@ -71,7 +71,7 @@ public class EditItemActivity extends AppCompatActivity {
         height.setText(dimensions.getHeight());
 
         com.example.sharingapp.Status status = item.getStatus();
-        if (status.equals("Borrowed")) {
+        if (status.equals(Status.BORROWED)) {
             this.status.setChecked(false);
             borrower.setText(item.getBorrower());
         } else {
@@ -168,7 +168,7 @@ public class EditItemActivity extends AppCompatActivity {
         String id = item.getId();
         item_list.deleteItem(item);
 
-        Item updated_item = new Item(title_str,maker_str,description_str,dimensions,image,Status.BORROWED);
+        Item updated_item = new Item(title_str, maker_str, description_str, dimensions, image, Status.BORROWED);
 
         boolean checked = status.isChecked();
         if (!checked) {
